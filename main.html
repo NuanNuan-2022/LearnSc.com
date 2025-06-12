@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LearnCS.io - Educational Simulation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #ffcccc;
+      color: darkred;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+      border-bottom: 2px solid red;
+    }
+
+    .container {
+      background: #fff;
+      width: 400px;
+      padding: 40px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 400;
+    }
+
+    .google-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .google-btn img {
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .login-form {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .login-form button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background: #1a73e8;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .footer-note {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: red;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner">
+    ⚠️ Simulation only. Do NOT enter real credentials. For education & cybersecurity awareness.
+  </div>
+
+  <div class="container">
+    <h1>LearnCS.io</h1>
+    <p>Sign in to access computer science training modules</p>
+
+    <button class="google-btn" onclick="document.getElementById('loginForm').style.display = 'block';">
+      <img src="https://www.google.com/favicon.ico" alt="Google Icon">
+      Sign in with Google
+    </button>
+
+    <div id="loginForm" class="login-form">
+      <label>Email or phone</label>
+      <input id="email" type="text" placeholder="you@example.com" required>
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Enter your Google password" required>
+      <button onclick="saveData()">Login</button>
+      <div id="failMsg" class="message">Login failed. Please try again.</div>
+    </div>
+
+    <div class="footer-note">
+      This is a demo phishing simulation for classroom use. Nothing is sent or stored online.
+    </div>
+  </div>
+
+  <script>
+    function saveData() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const blob = new Blob(
+        [`Email: ${email}\nPassword: ${password}`],
+        { type: "text/plain;charset=utf-8" }
+      );
+
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "data.txt";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      document.getElementById('failMsg').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
